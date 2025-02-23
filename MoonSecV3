@@ -1,11 +1,3 @@
-local player = game.Players.LocalPlayer
-
-if player.Name == "whatdahell" or player.Name == "hoajldh456" or player.Name == "NOOD_Mouse" or player.Name == "hoang_huy1k9" or player.Name == "thaylam5A1" then
-    print("buy script")
-else
-    player:Kick("buy script discord:nhm_roblox")
-end
-
 local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
 local window = DrRayLibrary:Load("⭐️flandre hub⭐️", "")
 
@@ -265,28 +257,45 @@ tab2.newToggle("Auto Proximity Prompt", "Auto Click Button Hand Icon And E Or Sm
     end)
 end)
 
--- Auto Mahogara
 tab2.newToggle("Auto Mahogara", "Need Malevolent Shrine, Summon The Treasure", false, function(value)
     getgenv().autoEquip = value
+    local toolName = "Summon The Treasure"
+    local player = game.Players.LocalPlayer
 
-    spawn(function()
-        while getgenv().autoEquip do
-            local player = game.Players.LocalPlayer
-            local backpack = player:FindFirstChild("Backpack")
-
-            if backpack then
-                local summonTool = backpack:FindFirstChild("Summon The Treasure")
-                if summonTool then
-                    player.Character.Humanoid:EquipTool(summonTool)
+    while getgenv().autoEquip do
+        -- Chuyển qua tool "Black Flash Kick"
+        game:GetService("ReplicatedStorage").OtherThing.Tools:FireServer("Malevolent Shrine", "Special")
+        
+        -- Đợi 0.5 giây rồi đổi sang "Summon The Treasure"
+        task.wait(0.5)
+        
+        -- Chuyển ngay lập tức qua tool "Summon The Treasure"
+        game:GetService("ReplicatedStorage").OtherThing.Tools:FireServer("Summon The Treasure", "Special")
+        
+        -- Đợi 2 giây trước khi bắt đầu tự động trang bị tool
+        task.wait(2)
+        
+        -- Liên tục trang bị tool "Summon The Treasure" nếu có trong backpack
+        task.spawn(function()
+            while getgenv().autoEquip do
+                local backpack = player:FindFirstChild("Backpack")
+                if backpack then
+                    local tool = backpack:FindFirstChild(toolName)
+                    if tool and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+                        player.Character:FindFirstChildOfClass("Humanoid"):EquipTool(tool)
+                    else
+                        warn("Tool not found in backpack")
+                    end
+                else
+                    warn("Backpack not found")
                 end
+                task.wait(2) -- Kiểm tra và trang bị tool mỗi 2 giây
             end
-
-            game:GetService("ReplicatedStorage").OtherThing.Tools:FireServer("Malevolent Shrine", "Special")
-            task.wait(0.5)
-            game:GetService("ReplicatedStorage").OtherThing.Tools:FireServer("Summon The Treasure", "Special")
-            task.wait(2)
-        end
-    end)
+        end)
+        
+        -- Đợi 50 giây trước khi tiếp tục lặp
+        task.wait(50)
+    end
 end)
 
 tab2.newToggle("Loop Grabtools", "Spam Grabtools Script", false, function(value)
