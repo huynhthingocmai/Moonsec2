@@ -1,33 +1,51 @@
-local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
-local window = DrRayLibrary:Load("⭐️flandre hub⭐️", "")
+local player = game.Players.LocalPlayer
 
-local tab = DrRayLibrary.newTab("Universal", "")
+if player.Name == "whatdahell" or player.Name == "hoajldh456" or player.Name == "NOOD_Mouse" or player.Name == "hoang_huy1k9" or player.Name == "thaylam5A1" then
+    print("buy script")
+else
+    player:Kick("buy script discord:nhm_roblox")
+end
 
-tab.newButton("Script By Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+local normal = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Lucifer4381/ui-normal-hub/main/scr')))()
 
-tab.newButton("Fly V3", "Fe Fly script ", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/huynhthingocmai/FlyV3/refs/heads/main/Moonsecv3"))()
-    print('Hello!')
-end)
+_G.Color = Color3.fromRGB(255, 182, 193) -- Màu giao diện
+_G.Logo = 125307995960610 -- ID Logo của Hub
+local Win = library:Evil("⭐️flandre hub⭐️", "", _G.Logo)
 
-tab.newButton("Inf Yield", "Fe Admin Script", function()
+-- Tạo Tab đầu tiên
+local Tab1 = Win:CraftTab('universal') -- Tạo tab 'Main'
+local Page1_1 = Tab1:CraftPage('fe script', 1) -- Trang 1 trong Tab1
+local Page1_2 = Tab1:CraftPage('local player', 2) -- Trang 2 trong Tab1
+
+Page1_1:Button('inf yield',function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-    print('Hello!')
+ --Name
+    print("t")
 end)
 
-tab.newButton("Nameless Admin", "Fe Admin Script", function()
+Page1_1:Button('nameless admin',function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))()
-    print('Hello!')
+ --Name
+    print("t")
 end)
 
-tab.newButton("Key Broad", "Fe Keybroad Script", function()
+Page1_1:Button('key broad',function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Xxtan31/Ata/main/deltakeyboardcrack.txt", true))()
-    print('Hello!')
+ --Name
+    print("t")
 end)
 
-tab.newToggle("Kill Aura", "Just Is Kill Aura", false, function(value)
+Page1_1:Button('fly v3',function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/huynhthingocmai/FlyV3/refs/heads/main/Moonsecv3"))() --Name
+    print("t")
+end)
+
+Page1_1:Button('tp player',function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Infinity2346/Tect-Menu/main/Teleport%20Gui.lua'))() --Name
+    print("t")
+end)
+
+Page1_1:Toggle('kill aura',nil,function(value)
 getgenv().G = value
 getgenv().Creator = 'https://discord.gg/B3HqPPzFYr - HalloweenGaster'
 
@@ -47,11 +65,11 @@ spawn(function()
         end
     end
 end)
-        print(value and "On" or "Off")
+ -- Toggle,Def,callback
+    print(value)
 end)
 
-
-tab.newSlider("Walkspeed", "Fe Walk Speed", 500, false, function(value)
+Page1_2:Slider("walk speed",true,0,200,1,function(value)
 local player = game:GetService("Players").LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -60,29 +78,147 @@ if humanoid then
     humanoid.WalkSpeed = value -- Thay đổi giá trị này để chỉnh tốc độ
 end
 
-    print(num)
+    print(value)
 end)
 
-tab.newSlider("Jumpower", "Fe Jump Power", 500, false, function(value)
+Page1_2:Slider("jump power",true,0,200,1,function(value)
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:FindFirstChildOfClass("Humanoid")
 
-if humanoid then
-    humanoid.JumpPower = value -- Mặc định là 50, có thể chỉnh cao hơn
-    print("JumpPower đã được tăng lên: " .. humanoid.JumpPower)
+while true do
+    -- Đợi 0.1 giây để tránh lag game
+    wait(0.1)
+
+    -- Kiểm tra nhân vật có tồn tại không
+    character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+
+    if humanoid then
+        humanoid.JumpPower = value -- Thay đổi giá trị tùy ý
+        print("JumpPower đã được tăng lên: " .. humanoid.JumpPower)
+    end
 end
 
-    print(num)
+    print(value)
 end)
 
-local tab2 = DrRayLibrary.newTab("Main", "ImageIdHere")
+Page1_2:LabelLog('dont set jump power to 0!')
 
-tab2.newButton("Script By Ngoc Mai", "54hz ", function()
-    print('Hello!')
+Page1_2:Toggle('esp',nil,function(value)
+getgenv().FlaggingESP = value
+
+    local function ApplyESP(v)
+        if v.Character and v.Character:FindFirstChildOfClass('Humanoid') then
+            v.Character.Humanoid.NameDisplayDistance = getgenv().FlaggingESP and 9e9 or 50
+            v.Character.Humanoid.NameOcclusion = getgenv().FlaggingESP and "NoOcclusion" or "OccludeAll"
+            v.Character.Humanoid.HealthDisplayDistance = getgenv().FlaggingESP and 9e9 or 50
+            v.Character.Humanoid.HealthDisplayType = getgenv().FlaggingESP and "AlwaysOn" or "Never"
+            v.Character.Humanoid.Health = v.Character.Humanoid.Health
+        end
+    end
+
+    for i, v in pairs(game.Players:GetPlayers()) do
+        ApplyESP(v)
+    end
+
+    game.Players.PlayerAdded:Connect(function(v)
+        ApplyESP(v)
+        v.CharacterAdded:Connect(function()
+            task.wait(0.33)
+            ApplyESP(v)
+        end)
+    end) -- Toggle,Def,callback
+    print(value)
 end)
 
-tab2.newButton("Auto Rock Chest", "Only Auto 1 Times", function()
+Page1_2:Toggle('inf jump',nil,function(value)
+getgenv().infi = value 
+ local Player = game.Players.LocalPlayer 
+ if infi ~= inf then 
+ inf = game.UserInputService.JumpRequest:Connect(function() 
+ if infi == false then inf:Disconnect() end 
+     Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) 
+ wait() 
+ end) 
+ end  -- Toggle,Def,callback
+    print(value)
+end)
+
+Page1_2:Toggle('noclip',nil,function(value)
+getgenv().Clip = value 
+ wait(0.1) 
+ local function NoclipLoop() 
+ if Clip == true and game.Players.LocalPlayer.Character ~= nil then 
+ for _, c in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do 
+                                 if c:IsA("BasePart") and c.CanCollide == true and c.Name ~= floatName then 
+ c.CanCollide = false 
+ end 
+ end 
+ end 
+ end 
+ Noclipping = game:GetService("RunService").Stepped:Connect(NoclipLoop) 
+
+ if not getgenv().Clip then Noclipping:Disconnect() end  -- Toggle,Def,callback
+    print(value)
+end)
+
+local players = game:GetService("Players")
+local localPlayer = players.LocalPlayer
+local selectedPlayer = nil -- Lưu người chơi được chọn
+local dropdown -- Lưu dropdown để cập nhật
+
+-- Hàm lấy danh sách người chơi
+local function getPlayerNames()
+    local names = {}
+    for _, player in pairs(players:GetPlayers()) do
+        table.insert(names, player.Name)
+    end
+    return names
+end
+
+-- Hàm tạo lại dropdown
+local function createDropdown()
+    if dropdown then
+        dropdown:Remove() -- Xóa dropdown cũ nếu có
+    end
+    dropdown = Page1_2:Dropdown("Chooss player👇", getPlayerNames(), {""}, function(v)
+        selectedPlayer = v
+        print("Đã chọn:", v)
+    end)
+end
+
+-- Tạo dropdown lần đầu
+createDropdown()
+
+-- Button teleport đến người được chọn
+Page1_2:Button("Teleport", function()
+    if selectedPlayer then
+        local targetPlayer = players:FindFirstChild(selectedPlayer)
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
+            if localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
+                print("Đã teleport đến", selectedPlayer)
+            end
+        else
+            print("Người chơi không tồn tại hoặc chưa load nhân vật.")
+        end
+    else
+        print("Hãy chọn một người chơi trước.")
+    end
+end)
+
+-- Sự kiện cập nhật danh sách khi có người vào hoặc rời
+players.PlayerAdded:Connect(createDropdown)
+players.PlayerRemoving:Connect(createDropdown)
+
+
+-- Tạo Tab thứ hai
+local Tab2 = Win:CraftTab('Main') -- Tạo tab 'Main 2'
+
+local Page2_1 = Tab2:CraftPage('auto', 1) -- Trang 1 trong Tab2
+
+Page2_1:Button('auto rock chest',function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -156,11 +292,13 @@ for _, position in ipairs(positions) do
     wait(0.1) -- Đợi để nhân vật ổn định
     triggerPrompt() -- Kiểm tra và kích hoạt ProximityPrompt nếu có
     wait(delayTime)
-end
-    print('Hello!')
+end --Name
+    print("t")
 end)
 
-tab2.newToggle("Auto Cabybara", "Need Void Head,Secret Grass", false, function(value)
+Page2_1:LabelLog('auto cabybara need:secret grass,void head')
+
+Page2_1:Toggle('auto cabybara',nil,function(value)
 getgenv().G = value
 getgenv().Creator = 'https://discord.gg/B3HqPPzFYr - HalloweenGaster'
 
@@ -185,9 +323,10 @@ spawn(function()
         end
         wait(1) -- Dừng 1 giây giữa mỗi lần dịch chuyển
     end
+end) -- Toggle,Def,callback
+    print(value)
 end)
-    print("Kill Aura:", value and "Bật" or "Tắt")
-end)
+
 
 -- Fishing Auto Toggle
 local function startFishing(fishType, stateVar)
@@ -213,21 +352,23 @@ local function startFishing(fishType, stateVar)
     end
 end
 
-tab2.newToggle("Fishing Desert", "Just auto fishing", false, function(value)
-    startFishing("Desert", "fishingEnabled1")
+Page2_1:Toggle('fishing desert',nil,function(value)
+    startFishing("Desert", "fishingEnabled1") -- Toggle,Def,callback
+    print(value)
 end)
 
-tab2.newToggle("Fishing Lava", "Just auto fishing", false, function(value)
-    startFishing("Lava", "fishingEnabled2")
+Page2_1:Toggle('fishing lava',nil,function(value)
+    startFishing("Lava", "fishingEnabled2") -- Toggle,Def,callback
+    print(value)
 end)
 
-tab2.newToggle("Fishing Snow", "Just auto fishing", false, function(value)
-    startFishing("Snow", "fishingEnabled3")
+Page2_1:Toggle('fishing snow',nil,function(value)
+    startFishing("Snow", "fishingEnabled3") -- Toggle,Def,callback
+    print(value)
 end)
 
--- Auto Proximity Prompt
-tab2.newToggle("Auto Proximity Prompt", "Auto Click Button Hand Icon And E Or Smth", false, function(value)
-    getgenv().AutoProximity = value
+Page2_1:Toggle('auto proximity prompt',nil,function(value)
+getgenv().AutoProximity = value
 
     spawn(function()
         while getgenv().AutoProximity do
@@ -254,11 +395,12 @@ tab2.newToggle("Auto Proximity Prompt", "Auto Click Button Hand Icon And E Or Sm
             end
             wait(0.1)
         end
-    end)
+    end) -- Toggle,Def,callback
+    print(value)
 end)
 
-tab2.newToggle("Auto Mahogara", "Need Malevolent Shrine, Summon The Treasure", false, function(value)
-    getgenv().autoEquip = value
+Page2_1:Toggle('auto mahogara',nil,function(value)
+getgenv().autoEquip = value
     local toolName = "Summon The Treasure"
     local player = game.Players.LocalPlayer
 
@@ -295,47 +437,56 @@ tab2.newToggle("Auto Mahogara", "Need Malevolent Shrine, Summon The Treasure", f
         
         -- Đợi 50 giây trước khi tiếp tục lặp
         task.wait(50)
-    end
+    end -- Toggle,Def,callback
+    print(value)
 end)
 
-tab2.newToggle("Loop Grabtools", "Spam Grabtools Script", false, function(value)
-getgenv().autograb = value
- spawn(function() 
- while autograb==true do wait() 
- if not getgenv().autograb then break end 
- local humanoid = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid") 
- for _, child in ipairs(workspace:GetChildren()) do 
- if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then 
- humanoid:EquipTool(child) 
- end 
- end 
- end 
- end) 
-    print("Kill Aura:", value and "Bật" or "Tắt")
-end)
+Page2_1:Toggle('auto pray',nil,function(value)
+-- by Duy Dz
 
-tab2.newButton("Touch Grabtools", "Teleport To drop Tool", function()
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart") -- Phần trung tâm của nhân vật
+getgenv().AutoPray = value -- Đổi thành false để tắt script
 
--- Kiểm tra xem một đối tượng có thể nhặt không (có Handle không)
-local function isPickupable(item)
-    return item:FindFirstChild("Handle") and item:IsA("Tool")
+local v = game:GetService("VirtualInputManager")
+local p = game:GetService("Players").LocalPlayer.PlayerGui.Pop.NotPray:FindFirstChild("Pray")
+local p2 = workspace.Map.Snow:FindFirstChild("Pray")
+local p3 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local p4 = game:GetService("Players").LocalPlayer.PlayerGui.Pop:FindFirstChild("NotPray")
+
+local function c(btn)
+    local btnPos = btn.AbsolutePosition
+    local btnSize = btn.AbsoluteSize 
+    local btn = btnPos + (btnSize / 1)
+    v:SendMouseButtonEvent(btn.X, btn.Y - 2, 0, true, game, 0)
+    v:SendMouseButtonEvent(btn.X, btn.Y - 2, 0, false, game, 0)
 end
 
--- Lặp qua tất cả các đối tượng trong Workspace
-for _, item in pairs(workspace:GetChildren()) do
-    if isPickupable(item) then
-        -- Dịch chuyển nhân vật đến vị trí của item
-        humanoidRootPart.CFrame = item.Handle.CFrame
-        break -- Chỉ dịch chuyển đến một vật phẩm đầu tiên tìm thấy
+task.spawn(function()
+    while wait() do
+        if not getgenv().AutoPray then return end -- Kiểm tra nếu AutoPray bị tắt thì dừng script
+        
+        if p2 and p3.CFrame ~= p2.CFrame and not p4.Visible then
+            p3.CFrame = p2.CFrame
+            wait(0.5)
+            v:SendKeyEvent(true, Enum.KeyCode.G, false, game)
+            wait(1.5)
+            v:SendKeyEvent(false, Enum.KeyCode.G, false, game)
+        end
+        
+        if p then
+            c(p)
+            wait(0.5)
+        end
     end
-end
-    print('Hello!')
+end)
+ -- Toggle,Def,callback
+    print(value)
 end)
 
-tab2.newButton("Use All Helmet", "Not Real XD", function()
+Page2_1:LabelLog('auto pray at 17/3/2025')
+
+local Page2_2 = Tab2:CraftPage('others', 2) -- Trang 2 trong Tab2
+
+Page2_2:Button('equip all helmet(not real)',function()
 while wait() do
     local remote = game:GetService("ReplicatedStorage").OtherThing.Tools
 
@@ -361,17 +512,53 @@ while wait() do
     else
         warn("Không tìm thấy RemoteEvent hoặc FireServer không tồn tại!")
     end
+end --Name
+    print("t")
+end)
+
+Page2_2:Button('teleport grabtools',function()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart") -- Phần trung tâm của nhân vật
+
+-- Kiểm tra xem một đối tượng có thể nhặt không (có Handle không)
+local function isPickupable(item)
+    return item:FindFirstChild("Handle") and item:IsA("Tool")
 end
-    print('Hello!')
+
+-- Lặp qua tất cả các đối tượng trong Workspace
+for _, item in pairs(workspace:GetChildren()) do
+    if isPickupable(item) then
+        -- Dịch chuyển nhân vật đến vị trí của item
+        humanoidRootPart.CFrame = item.Handle.CFrame
+        break -- Chỉ dịch chuyển đến một vật phẩm đầu tiên tìm thấy
+    end
+end --Name
+    print("t")
 end)
 
-local tab4 = DrRayLibrary.newTab("No Cooldown", "ImageIdHere")
-
-tab4.newButton("Script By Ngoc Mai", "54hz ", function()
-    print('Hello!')
+Page2_2:Toggle('auto grabtools',nil,function(value)
+getgenv().autograb = value
+ spawn(function() 
+ while autograb==true do wait() 
+ if not getgenv().autograb then break end 
+ local humanoid = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid") 
+ for _, child in ipairs(workspace:GetChildren()) do 
+ if game.Players.LocalPlayer.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then 
+ humanoid:EquipTool(child) 
+ end 
+ end 
+ end 
+ end)  -- Toggle,Def,callback
+    print(value)
 end)
 
-tab4.newToggle("Auto Skill 1", "idk", false, function(value)
+local Tab = Win:CraftTab('no cooldown') -- Name
+local Page3_1 = Tab:CraftPage('Main',1) -- Name,1 or 2
+
+Page3_1:LabelLog('tutorial at ytb flandre hub mahogara vid')
+
+Page3_1:Toggle('skill 1',nil,function(value)
 getgenv().AutoUseTool1 = value -- Biến để bật/tắt script
 
 spawn(function()
@@ -388,11 +575,11 @@ spawn(function()
 
         wait(0.1) -- Giảm thời gian chờ nếu muốn tốc độ kích hoạt nhanh hơn
     end
-end)
-    print("Kill Aura:", value and "Bật" or "Tắt")
+end) -- Toggle,Def,callback
+    print(value)
 end)
 
-tab4.newToggle("Auto Skill 2", "idk", false, function(value)
+Page3_1:Toggle('skill 2',nil,function(value)
 getgenv().AutoUseTool2 = value -- Biến để bật/tắt script
 
 spawn(function()
@@ -409,11 +596,11 @@ spawn(function()
 
         wait(0.1) -- Giảm thời gian chờ nếu muốn tốc độ kích hoạt nhanh hơn
     end
-end)
-    print("Kill Aura:", value and "Bật" or "Tắt")
+end) -- Toggle,Def,callback
+    print(value)
 end)
 
-tab4.newToggle("Auto Skill 3", "idk", false, function(value)
+Page3_1:Toggle('skill 3',nil,function(value)
 getgenv().AutoUseTool3 = value -- Biến để bật/tắt script
 
 spawn(function()
@@ -430,23 +617,22 @@ spawn(function()
 
         wait(0.1) -- Giảm thời gian chờ nếu muốn tốc độ kích hoạt nhanh hơn
     end
-end)
-    print("Kill Aura:", value and "Bật" or "Tắt")
-end)
-
-local tab5 = DrRayLibrary.newTab("Teleports", "ImageIdHere")
-
-tab5.newButton("Script By Ngoc Mai", "54hz ", function()
+end) -- Toggle,Def,callback
+    print(value)
 end)
 
-tab5.newButton("chad island", "teleport", function()
+local Tab4 = Win:CraftTab('teleport') -- Name
+
+local Page4_1 = Tab4:CraftPage('page 1',1) -- Name,1 or 2
+
+Page4_1:Button("chad island",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(-709, 10, 509)
     character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
 end)
 
-tab5.newButton("big brain island", "teleport", function()
+Page4_1:Button("big brain island",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(556, 10, 506)
@@ -454,7 +640,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("kenjaku", "teleport", function()
+Page4_1:Button("kenjaku",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(5217.044921875, 2260.821533203125, -4130.38330078125)
@@ -462,7 +648,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("desert island", "teleport", function()
+Page4_1:Button("desert island",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(-340.91278076171875, 18.29494857788086, -997.4833374023438)
@@ -470,7 +656,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("desert fishing", "teleport", function()
+Page4_1:Button("desert fishing",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(890.1141967773438, 9.118748664855957, -828.7176513671875)
@@ -479,7 +665,7 @@ local player = game.Players.LocalPlayer
 end)
 
 
-tab5.newButton("cabybara fight room", "teleport", function()
+Page4_1:Button("cabybara fight room",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(5432.73046875, 1755.6904296875, 610.4720458984375)
@@ -487,7 +673,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("maxwell fight room", "teleport", function()
+Page4_1:Button("maxwell fight room",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(-14569.0859375, 4700.61181640625, -3191.745361328125)
@@ -495,7 +681,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("lava island", "teleport", function()
+Page4_1:Button("lava island",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(2801.695556640625, 11.266153335571289, -180.07965087890625)
@@ -503,7 +689,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("diavolo boss", "teleport", function()
+Page4_1:Button("diavolo boss",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -516,7 +702,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("dog fight room", "teleport", function()
+Page4_1:Button("dog fight room",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -529,7 +715,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("lava raid", "teleport", function()
+Page4_1:Button("lava raid",function()
 local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local targetPosition = Vector3.new(3485.044677734375, 23.636802673339844, -1055.036865234375)
@@ -537,7 +723,7 @@ local player = game.Players.LocalPlayer
     print('Hello!')
 end)
 
-tab5.newButton("lava fishing", "teleport", function()
+Page4_1:Button("lava fishing",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -550,7 +736,9 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("snow island", "teleport", function()
+local Page4_2 = Tab4:CraftPage('page 2',2) -- Name,1 or 2
+
+Page4_2:Button("snow island",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -563,7 +751,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("praying", "teleport", function()
+Page4_2:Button("praying",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -576,7 +764,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("snow fishing", "teleport", function()
+Page4_2:Button("snow fishing",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -589,7 +777,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("misaka fight room", "teleport", function()
+Page4_2:Button("misaka fight room",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -602,7 +790,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("dagon fight room", "teleport", function()
+Page4_2:Button("dagon fight room",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -615,7 +803,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("dagon domaim", "teleport", function()
+Page4_2:Button("dagon domaim",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -628,7 +816,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("mahito fight room", "teleport", function()
+Page4_2:Button("mahito fight room",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -641,7 +829,7 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-tab5.newButton("mahito domain", "teleport", function()
+Page4_2:Button("mahito domain",function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -654,45 +842,26 @@ character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
     print('Hello!')
 end)
 
-local tab0 = DrRayLibrary.newTab("credits", "ImageIdHere")
+local Tab5 = Win:CraftTab('credits') -- Name
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+local Page5_1 = Tab5:CraftPage('credits',1) -- Name,1 or 2
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('auto pray by duyvel')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
-tab0.newButton("script by Ngoc Mai", "54hz ", function()
-    print('Hello!')
-end)
+Page5_1:LabelLog('script make by 54hz')
 
+Page5_1:LabelLog('script make by 54hz')
